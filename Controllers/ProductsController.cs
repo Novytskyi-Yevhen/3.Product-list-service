@@ -26,7 +26,7 @@ namespace ProductsWithRouting.Controllers
         {
             return View(myProducts);
         }
-        [Route("/products/{id}")]
+        [Route("/products/{id?}")]
         public IActionResult View(int id)
         {
             if (id < 1 || id > myProducts.Count)
@@ -65,7 +65,7 @@ namespace ProductsWithRouting.Controllers
             }
             return View(myProducts.Last());
         }
-
+        [Route("/products/delete/{id?}")]
         public IActionResult Delete(int id)
         {
             int ind = myProducts.FindIndex(p => p.Id == id);
