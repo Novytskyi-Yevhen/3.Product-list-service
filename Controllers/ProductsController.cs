@@ -37,9 +37,8 @@ namespace ProductsWithRouting.Controllers
         public IActionResult Edit(Product product)
         {
             int ind = myProducts.FindIndex(p => p.Id == product.Id);
-            if (ind >= 0)
-                myProducts[ind] = product;
-            return View(product);
+            myProducts[ind] = product;
+            return View(myProducts[ind]);
         }
         
         [HttpPost]
