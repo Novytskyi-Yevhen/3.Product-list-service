@@ -59,11 +59,15 @@ namespace ProductsWithRouting.Controllers
             return View(myProducts[ind]);
         }
         [HttpGet]
+        [Route("/products/create")]
+        [Route("/products/new")]
         public IActionResult Create()
         {
             return View(new Product() { Id = myProducts.Count + 1 });
         }
         [HttpPost]
+        [Route("/products/create")]
+        [Route("/products/new")]
         public IActionResult Create(Product product)
         {
             if (!myProducts.Exists(p => p.Id == product.Id))
