@@ -18,17 +18,21 @@ namespace ProductsWithRouting.Controllers
         {
             myProducts = data.Products;
         }
-        [Route("/items/index")]
         [Route("/products/index")]
-        [Route("/items")]
+        [Route("/items/index")]
         [Route("/products")]
+        [Route("/items")]
         public IActionResult Index(int filterId, string filtername)
         {
             return View(myProducts);
         }
-
+        [Route("/products/{id}")]
         public IActionResult View(int id)
         {
+            if (id < 1 || id > myProducts.Count)
+            {
+                return RedirectToAction("Error");
+            }
             return View(myProducts.Find(p => p.Id == id));
         }
         [HttpGet]
