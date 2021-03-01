@@ -26,21 +26,20 @@ namespace ProductsWithRouting.Controllers
 
         public IActionResult View(int id)
         {
-            //Please, add your implementation of the method
-            return View(/*TODO: pass corresponding product here*/);
+            return View(myProducts.Find(p => p.Id == id));
         }
         [HttpGet]
         public IActionResult Edit(int id)
         {
-            //Please, add your implementation of the method
-            return View(/*TODO: pass corresponding product here*/);
+            return View(myProducts.Find(p => p.Id == id));
         } 
         [HttpPost]
         public IActionResult Edit(Product product)
         {
-            //Please, add your implementation of the method
-            return View(/*TODO: pass corresponding product here*/);
-        } 
+            int ind = myProducts.FindIndex(p => p.Id == product.Id);
+            myProducts[ind] = product;
+            return View(myProducts[ind]);
+        }
         
         [HttpPost]
         public IActionResult Create(Product product)
