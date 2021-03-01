@@ -18,7 +18,10 @@ namespace ProductsWithRouting.Controllers
         {
             myProducts = data.Products;
         }
-
+        [Route("/items/index")]
+        [Route("/products/index")]
+        [Route("/items")]
+        [Route("/products")]
         public IActionResult Index(int filterId, string filtername)
         {
             return View(myProducts);
