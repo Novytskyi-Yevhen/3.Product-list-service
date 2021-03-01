@@ -36,13 +36,20 @@ namespace ProductsWithRouting.Controllers
             return View(myProducts.Find(p => p.Id == id));
         }
         [HttpGet]
-        public IActionResult Edit(int id)
+        [Route("/products/edit/{id?}")]
+        public IActionResult Edit(int id = 1)
         {
+            if (id < 1 || id > myProducts.Count)
+            {
+                return RedirectToAction("Error");
+            }
+            ViewBag.myProducts = myProducts;
             return View(myProducts.Find(p => p.Id == id));
         } 
         [HttpPost]
         public IActionResult Edit(Product product)
         {
+            ViewBag.myProducts = myProducts;
             int ind = myProducts.FindIndex(p => p.Id == product.Id);
             if (ind < 0)
             {
@@ -74,7 +81,7 @@ namespace ProductsWithRouting.Controllers
                 return RedirectToAction("Error");
             }
             myProducts.RemoveAt(ind);
-            return View("Index", myProducts);
+            return RedirectToAction("Index", myProducts);
         }
 
         public IActionResult Error()
