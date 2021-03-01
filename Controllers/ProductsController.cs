@@ -47,18 +47,19 @@ namespace ProductsWithRouting.Controllers
             myProducts[ind] = product;
             return View(myProducts[ind]);
         }
-        
+        [HttpGet]
+        public IActionResult Create()
+        {
+            return View(new Product() { Id = myProducts.Count + 1 });
+        }
         [HttpPost]
         public IActionResult Create(Product product)
         {
-            //Please, add your implementation of the method
-            return View(/*TODO: pass corresponding product here*/);
-        }
-
-        public IActionResult Create()
-        {
-            //Please, add your implementation of the method
-            return View(/*TODO: pass corresponding product here*/);
+            if (!myProducts.Exists(p => p.Id == product.Id))
+            {
+                myProducts.Add(product);
+            }
+            return View(myProducts.Last());
         }
 
         public IActionResult Delete(int id)
