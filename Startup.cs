@@ -9,6 +9,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using ProductsWithRouting.Services;
+using ProductsWithRouting.Services.Interfaces;
 
 namespace ProductsWithRouting
 {
@@ -26,6 +27,7 @@ namespace ProductsWithRouting
         {
             services.AddControllersWithViews();
             services.AddSingleton<Data>();
+            services.AddScoped<IProductFilter, ProductFilterService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

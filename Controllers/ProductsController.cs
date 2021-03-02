@@ -7,16 +7,19 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using ProductsWithRouting.Models;
 using ProductsWithRouting.Services;
+using ProductsWithRouting.Services.Interfaces;
 
 namespace ProductsWithRouting.Controllers
 {
     public class ProductsController : Controller
     {
         private List<Product> myProducts;
+        private IProductFilter productFilter;
 
-        public ProductsController(Data data)
+        public ProductsController(Data data, IProductFilter filter)
         {
             myProducts = data.Products;
+            productFilter = filter;
         }
         [Route("/products/index")]
         [Route("/items/index")]
@@ -24,7 +27,9 @@ namespace ProductsWithRouting.Controllers
         [Route("/items")]
         public IActionResult Index(int filterId, string filtername)
         {
-            return View(myProducts);
+            productFilter.FilterId = filterId;
+            productFilter.FilterName = filtername;
+            return View(productFilter.Filter());
         }
         [Route("/products/{id?}")]
         public IActionResult View(int id)
