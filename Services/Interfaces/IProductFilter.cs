@@ -1,11 +1,10 @@
-﻿using System.Collections.Generic;
+﻿using ProductsWithRouting.Models;
+using System.Collections.Generic;
 
 namespace ProductsWithRouting.Services.Interfaces
 {
     public interface IProductFilter
     {
-        public int FilterId { get; set; }
-        public string FilterName { get; set; }
-        public IEnumerable<ProductsWithRouting.Models.Product> Filter();
+        public IEnumerable<Product> FilterBy(Product product);
     }
 }

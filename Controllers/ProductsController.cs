@@ -23,11 +23,9 @@ namespace ProductsWithRouting.Controllers
         [Route("/items/index")]
         [Route("/products")]
         [Route("/items")]
-        public IActionResult Index(int filterId, string filtername)
+        public IActionResult Index(Product product)
         {
-            productFilter.FilterId = filterId;
-            productFilter.FilterName = filtername;
-            return View(productFilter.Filter());
+            return View(productFilter.FilterBy(product));
         }
         [Route("/products/{id}")]
         [ValidateProductExists]
@@ -85,7 +83,6 @@ namespace ProductsWithRouting.Controllers
         {
             return View();
         }
-
         public IActionResult Error()
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
