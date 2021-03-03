@@ -21,12 +21,21 @@ namespace ProductsWithRouting.Controllers
 
         public IActionResult Index(string id)
         {
-            return View(myUsers);
+            if (id == "df2323eoT")
+            {
+                return View(myUsers);
+            }
+            else
+                return RedirectToAction("UnauthorizedAction", "users", null);
         }
 
         public IActionResult Error()
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        }
+        public IActionResult UnauthorizedAction()
+        {
+            return View();
         }
 
     }
