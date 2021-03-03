@@ -9,28 +9,26 @@ namespace ProductsWithRouting.Services
     {
         private List<Product> products;
 
-        public int FilterId { get; set; }
-        public string FilterName { get; set; }
-
         public ProductFilterService(Data data)
         {
             products = data.Products;
         }
 
-        public IEnumerable<Product> Filter()
+        public IEnumerable<Product> FilterBy(Product product)
         {
             IEnumerable<Product> filtered = products;
-
-            if (FilterId != 0)
+            if (product.Id != 0)
             {
-                filtered = filtered.Where(p => p.Id == FilterId);
+                filtered = filtered.Where(p => p.Id == product.Id);
             }
-
-            if (!string.IsNullOrEmpty(FilterName))
+            if (!string.IsNullOrEmpty(product.Name))
             {
-                filtered = filtered.Where(p => p.Name == FilterName);
+                filtered = filtered.Where(p => p.Name.Contains(product.Name));
             }
-
+            if(!string.IsNullOrEmpty(product.Description))
+            {
+                filtered = filtered.Where(p => p.Description.Contains(product.Description));
+            }
             return filtered;
         }
     }
