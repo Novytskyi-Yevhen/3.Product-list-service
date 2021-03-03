@@ -37,6 +37,15 @@ namespace ProductsWithRouting.Controllers
         {
             return View();
         }
-
+        [HttpGet]
+        public IActionResult AdminLogin()
+        {
+            return View();
+        }
+        [HttpPost]
+        public IActionResult AdminLogin(AdminLogin admin)
+        {
+            return RedirectToAction("Index", "users", new { id = admin.Login });
+        }
     }
 }
